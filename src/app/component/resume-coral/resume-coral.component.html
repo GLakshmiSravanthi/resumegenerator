@@ -1,0 +1,320 @@
+<div class="row">
+    <form class="col s12" [formGroup]="resumeForm">
+        <div class="row">
+            <div class="input-field col s4">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="icon_name" type="text" class="validate" formControlName="name" required autocomplete="off">
+                <label for="icon_name">Name</label>
+                <div *ngIf="resumeForm.controls['name'].invalid && (resumeForm.controls['name'].dirty || resumeForm.controls['name'].touched)" class="alert alert-danger">
+                    <div *ngIf="resumeForm.controls['name'].errors.required">
+                        Name is required.
+                    </div>
+                </div>
+            </div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">contact_phone</i>
+                <input id="icon_telephone" type="tel" class="validate" formControlName="phone" required autocomplete="off">
+                <label for="icon_telephone">Telephone</label>
+                <div *ngIf="resumeForm.controls['phone'].invalid && (resumeForm.controls['phone'].dirty || resumeForm.controls['phone'].touched)" class="alert alert-danger">
+                    <div *ngIf="resumeForm.controls['phone'].errors.required">
+                        phone is required.
+                    </div>
+                </div>
+            </div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">email</i>
+                <input id="icon_email" type="email" class="validate" formControlName="email" required autocomplete="off" autocomplete="off">
+                <label for="icon_email">Email</label>
+                <div *ngIf="resumeForm.controls['email'].invalid && (resumeForm.controls['email'].dirty || resumeForm.controls['email'].touched)" class="alert alert-danger">
+                    <div *ngIf="resumeForm.controls['email'].errors.required">
+                        email is required.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">person_pin</i>
+                <input id="icon_address" type="text" class="validate" formControlName="address" required autocomplete="off">
+                <label for="icon_address">Address</label>
+                <div *ngIf="resumeForm.controls['address'].invalid && (resumeForm.controls['address'].dirty || resumeForm.controls['address'].touched)" class="alert alert-danger">
+                    <div *ngIf="resumeForm.controls['address'].errors.required">
+                        address is required.
+                    </div>
+                </div>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="icon_cod" class="materialize-textarea" formControlName="cod" autocomplete="off"></textarea>
+                <label for="icon_cod">Carrer Objective</label>
+            </div>
+        </div>
+        <div>
+            <h5><i class="material-icons">work</i> Experience
+                <a class="waves-effect waves-light btn addex" (click)="addExperience()"><i class="material-icons prefix ">plus_one</i></a></h5>
+        </div>
+        <div formArrayName="experience" *ngFor="let experiences of experienceForm.controls let i = index">
+            <ng-container [formGroupName]="i">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">business</i>
+                        <input id="icon_company_name" type="text" class="validate" formControlName="company_name" autocomplete="off">
+                        <label for="icon_company_name">Company</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">room</i>
+                        <input id="icon_company_location" type="text" class="validate" formControlName="company_location" autocomplete="off">
+                        <label for="icon_company_location">Location</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">title</i>
+                        <input id="icon_company_job_title" type="text" class="validate" formControlName="company_job_title" autocomplete="off">
+                        <label for="icon_company_job_title">Job Title</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">calendar_today</i>
+                        <label for="icon_company_enter">Start Date</label>
+                        <input id="company_enter" type="text" class="datepicker" [attr.formid]="i" formControlName="company_enter" (change)=onDate($event) autocomplete="off">
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">calendar_today</i>
+                        <label for="icon_company_out">End Date</label>
+                        <input id="company_out" type="text" class="datepicker" [attr.formid]="i" formControlName="company_out" (change)=onDate($event) autocomplete="off">
+                        <div *ngIf="experience_error.isError" class="alert alert-danger">
+                            <div>{{ experience_error.errorMessage }}</div>
+                        </div>
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <textarea id="icon_company_details" class="materialize-textarea" formControlName="company_details" autocomplete="off"></textarea>
+                        <label for="icon_company_details">write about your work experinece</label>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div>
+            <h5><i class="material-icons">school</i> Education
+                <a class="waves-effect waves-light btn added" (click)="addEducation()"><i class="material-icons prefix ">plus_one</i></a></h5>
+        </div>
+        <div formArrayName="education" *ngFor="let educations of educationForm.controls; let i = index">
+            <ng-container [formGroupName]="i">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">business</i>
+                        <input id="icon_school_name" type="text" class="validate" formControlName="school_name" autocomplete="off">
+                        <label for="icon_school_name">Name</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">room</i>
+                        <input id="icon_school_location" type="text" class="validate" formControlName="school_location" autocomplete="off">
+                        <label for="icon_school_location">Location</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">class</i>
+                        <input id="icon_school_Degree" type="text" class="validate" formControlName="school_Degree" autocomplete="off">
+                        <label for="icon_school_Degree">Degree</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">calendar_today</i>
+                        <label for="icon_school_enter">Start Date</label>
+                        <input id="school_enter" type="text" class="datepicker" [attr.formid]="i" formControlName="school_enter" (change)=onDate($event) autocomplete="off">
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">calendar_today</i>
+                        <label for="icon_school_out">End Date</label>
+                        <input id="school_out" type="text" class="datepicker" [attr.formid]="i" formControlName="school_out" (change)=onDate($event) autocomplete="off">
+                        <div *ngIf="education_error.isError" class="alert alert-danger">
+                            <div>{{ education_error.errorMessage }}</div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div>
+            <h5><i class="material-icons">assessment</i> Project
+                <a class="waves-effect waves-light btn addp" (click)="addProject()"><i class="material-icons prefix ">plus_one</i></a>
+            </h5>
+        </div>
+        <div formArrayName="project" *ngFor="let projects of projectForm.controls; let i = index">
+            <ng-container [formGroupName]="i">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">assignment</i>
+                        <input id="icon_project_name" type="text" class="validate" formControlName="project_name" autocomplete="off">
+                        <label for="icon_project_name">Project Name</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">calendar_today</i>
+                        <label for="icon_project_started">Project Started</label>
+                        <input id="project_started" type="text" class="datepicker" [attr.formid]="i" formControlName="project_started" (change)=onDate($event) autocomplete="off">
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">calendar_today</i>
+                        <label for="icon_project_ended">Project Ended</label>
+                        <input id="project_ended" type="text" class="datepicker" [attr.formid]="i" formControlName="project_ended" (change)=onDate($event) autocomplete="off">
+                        <div *ngIf="project_error.isError" class="alert alert-danger">
+                            <div>{{ project_error.errorMessage }}</div>
+                        </div>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">description</i>
+                        <textarea id="icon_project_description" class="materialize-textarea" formControlName="project_description" autocomplete="off"></textarea>
+                        <label for="icon_project_description">write about Project</label>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div>
+            <h5>
+                <i class="material-icons">emoji_events</i> Awards
+                <a class="waves-effect waves-light btn " (click)=addAwards()><i class="material-icons prefix ">plus_one</i></a>
+            </h5>
+        </div>
+        <div formArrayName="awards" *ngFor="let award of awardsForm.controls; let i = index">
+            <ng-container [formGroupName]="i">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">title</i>
+                        <input id="icon_award_name" type="text" class="validate" formControlName="award_name" autocomplete="off">
+                        <label for="icon_award_name">Award Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <textarea id="icon_award_description" class="materialize-textarea" formControlName="award_description" autocomplete="off"></textarea>
+                        <label for="icon_award_description">write about Award</label>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="icon_prefix_skill" class="materialize-textarea" formControlName="skills" autocomplete="off"></textarea>
+                <label for="icon_prefix_skill">write about your skills</label>
+            </div>
+            <div class="input-field col s3">
+                <button class="waves-effect waves-light btn modal-trigger" href="#modal1" (click)=Dataform() [disabled]="resumeForm.pristine || resumeForm.invalid || project_error.isError || education_error.isError || experience_error.isError ">Preview</button>
+            </div>
+            <div class="input-field col s3">
+                <button class="waves-effect waves-light btn" (click)=" pdf_file()">Download</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="modal1" class="modal">
+    <div class="modal-content" id="HeaderFooter">
+        <div class="col s12">
+            <div class="row">
+                <div class="col s12">
+                    <span style="font-family:'doc-Merriweather', serif;font-size:48px;color:#000000;
+            background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">{{resumeForm.value.name}}</span>‌
+                    <div><span style="font-family:'doc-Open Sans';
+              font-size:12px;color:#000000;background-color:transparent; font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">{{resumeForm.value.cod}}‌</span></div>
+                </div>
+                <div class="col s12" style="font-size:12px;font-family:'doc-Open Sans';
+          color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">
+                    <div>{{resumeForm.value.address}}</div>
+                    <div>{{resumeForm.value.phone}}</div>
+                    <div>{{resumeForm.value.email}}</div>
+                </div>
+                <div class="col s8">
+                    <div *ngIf="resumeForm.value.skills">
+                        <span style="font-size:12px;font-family:'doc-Open Sans';color:#2079c7;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">SKILLS</span>
+                        <div style="font-size:12px;font-family:'doc-Merriweather';color:#666666;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">{{resumeForm.value.skills}}</div>
+                    </div>
+                    <div *ngIf="resumeForm.value.experience[0].company_name">
+                        <span style="font-size:12px;font-family:'doc-Open Sans';color:#2079c7;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">EXPERIENCE‌</span>
+                        <div *ngFor="let experiences of resumeForm.value.experience; let i = index">
+                            <div class="col s12" style="margin-bottom: 20px">
+                                <div *ngIf="!resumeForm.value.experience[i].company_out" style="font-size:10.666666666666666px;font-family:'doc-Open Sans';color:#666666;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">{{resumeForm.value.experience[i].company_enter}} ‌-‌ present</div>
+                                <div *ngIf="resumeForm.value.experience[i].company_out" style="font-size:10.666666666666666px;font-family:'doc-Open Sans';color:#666666;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">{{resumeForm.value.experience[i].company_enter}} ‌-‌ {{resumeForm.value.experience[i].company_out}}</div>
+                                <div style="font-size:14.666666666666666px;font-family:doc-Merriweather;color:#000000;background-color:transparent;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">
+                                    <span style="font-weight:700;font-style:normal;">{{resumeForm.value.experience[i].company_name}},‌ ‌‌</span>
+                                    <span style="font-weight:400;font-style:normal;">{{resumeForm.value.experience[i].company_location}} ‌—‌ ‌‌</span>
+                                    <span style="font-weight:400;font-style:italic;">{{resumeForm.value.experience[i].company_job_title}}</span>
+                                </div>
+                                <div style="font-size:12px;font-family:'doc-Merriweather';color:#666666;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">{{resumeForm.value.experience[i].company_details}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="resumeForm.value.education[0].school_name">
+                        <span style="font-size:12px;font-family:'doc-Open Sans';color:#2079c7;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">EDUCATION</span>
+                        <div *ngFor="let educations of resumeForm.value.education; let i = index">
+                            <div class="col s12" style="margin-bottom: 20px">
+                                <div style="font-size:10.666666666666666px;font-family:'doc-Open Sans';color:#666666;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">{{resumeForm.value.education[i].school_enter}} ‌-‌ ‌{{resumeForm.value.education[i].school_out}} ‌</div>
+                                <div style="font-size:14.666666666666666px;font-family:'doc-Merriweather';color:#000000;background-color:transparent;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">
+                                    <span style="font-weight:700;font-style:normal;">{{resumeForm.value.education[i].school_name}},‌ ‌‌</span>
+                                    <span style="font-weight:400;font-style:normal;">{{resumeForm.value.education[i].school_location}} ‌—‌ ‌‌</span>
+                                    <span style="font-weight:400;font-style:italic;">{{resumeForm.value.education[i].school_Degree}}</span>
+                                </div>
+                                <!-- <div class="experinece-description" style="font-size:12px;font-family:docs-Merriweather;color:#666666;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">{{resumeForm.value.education[i].school_details}}</div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="resumeForm.value.project[0].project_name">
+                        <span style="font-size:12px;font-family:'doc-Open Sans';color:#2079c7;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">PROJECTS</span>
+                        <div *ngFor="let projects of resumeForm.value.project; let i = index">
+                            <div class="col s12" style="margin-bottom: 20px">
+                                <div style="font-size:14.666666666666666px;font-family:'doc-Merriweather';color:#000000;background-color:transparent;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">
+                                    <span style="font-weight:700;font-style:normal;">{{resumeForm.value.project[i].project_name}}</span>
+                                    <span style="font-weight:400;font-style:normal;">‌ —‌‌‌ </span>
+                                    <span style="font-weight:400;font-style:italic;">{{resumeForm.value.project[i].project_started}} —‌‌‌ {{resumeForm.value.project[i].project_ended}}</span>
+                                </div>
+                                <div style="font-size:12px;font-family:'doc-Merriweather';color:#666666;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">{{resumeForm.value.project[i].project_description}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 40px" *ngIf="resumeForm.value.awards[0].award_name || resumeForm.value.awards[0].award_description">
+                        <span style="font-size:12px;font-family:'doc-Open Sans';color:#2079c7;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;">AWARDS</span>
+                        <div *ngFor="let award of resumeForm.value.awards; let i = index">
+                            <div style="font-size:12px;font-family:'doc-Merriweather';color:#666666;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:normal;"><b>{{resumeForm.value.awards[i].award_name}}</b>{{resumeForm.value.awards[i].award_description}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal1" class="modal">
+    <div class="modal-content" id="HeaderFooter">
+        <div>
+            <p class="c17"><span class="c2 c14"></span></p>
+        </div>
+        <p class="c21 title"><span class="c2">Hello</span><span class="c19"><br></span><span>I&rsquo;m Your Name</span></p>
+        <p class="c1"><span class="c18">123 YOUR STREET</span></p>
+        <p class="c1"><span class="c18">YOUR CITY, ST 12345</span></p>
+        <p class="c1"><span class="c16">(123) 456-7890</span></p>
+        <p class="c1"><span class="c16">NO_REPLY@EXAMPLE.COM</span></p>
+        <h1 class="c13"><span>Skills</span></h1>
+        <p class="c11"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac interdum nisi. Sed in consequat mi. Sed pulvinar lacinia felis eu finibus.</span></p>
+        <h1 class="c13"><span>Experience</span></h1>
+        <h2 class="c7"><span>MONTH 20XX - PRESENT</span></h2>
+        <h3 class="c4"><span>Company Name, Location</span><span class="c3">&nbsp;- Job Title</span></h3>
+        <ul class="c12 lst-kix_y5lajpktzaow-0 start">
+            <li class="c8 c15"><span class="c6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span></li>
+            <li class="c8 c15"><span class="c6">Aenean ac interdum nisi. Sed in consequat mi.</span></li>
+            <li class="c8 c15"><span class="c6">Sed in consequat mi, sed pulvinar lacinia felis eu finibus.</span></li>
+        </ul>
+        <h2 class="c7"><span>MONTH 20XX - MONTH 20XX</span></h2>
+        <h3 class="c4"><span>Company Name, Location</span><span class="c3">&nbsp;- Job Title</span></h3>
+        <ul class="c12 lst-kix_y5lajpktzaow-0">
+            <li class="c8 c15"><span class="c6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span></li>
+            <li class="c8 c15"><span class="c6">Aenean ac interdum nisi. Sed in consequat mi. </span></li>
+        </ul>
+        <h2 class="c7"><span class="c10">MONTH 20XX - MONTH 20XX</span></h2>
+        <h3 class="c4"><span>Company Name, Location</span><span class="c3">&nbsp;- Job Title</span></h3>
+        <ul class="c12 lst-kix_y5lajpktzaow-0">
+            <li class="c8 c15"><span class="c6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span></li>
+            <li class="c8 c15"><span class="c6">Aenean ac interdum nisi. Sed in consequat mi. </span></li>
+            <li class="c8 c15"><span>Sed pulvinar lacinia felis eu finibus. </span></li>
+        </ul>
+        <h1 class="c13"><span class="c5 c2">Education</span></h1>
+        <h2 class="c7"><span class="c10">MONTH &nbsp;20XX - MONTH 20XX</span></h2>
+        <h3 class="c4"><span>College Name, Location</span><span class="c3">&nbsp;- Degree</span></h3>
+        <p class="c8"><span class="c6">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore.</span></p>
+        <h1 class="c13"><span class="c2 c5">Awards</span></h1>
+        <p class="c11"><span class="c6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></p>
+        <p class="c9"><span class="c6">Aenean ac interdum nisi. </span></p>
+    </div>
+</div>

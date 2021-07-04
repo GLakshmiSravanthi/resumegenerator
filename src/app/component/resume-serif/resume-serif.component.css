@@ -1,0 +1,93 @@
+.modal{
+	background: rgb(204,204,204); 
+}
+#HeaderFooter{
+background: white;
+display: block;
+margin: 0 auto;
+margin-bottom: 0.5cm;
+box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+width: 21cm;
+height: 29.7cm;
+}
+#word-node-name{
+	font-size:48px;
+	font-family:docs-Merriweather;
+	color:#000000;
+	background-color:transparent;
+	font-weight:700;
+	font-style:normal;
+	font-variant:normal;
+	text-decoration:none;
+	vertical-align:baseline;
+	white-space:pre;
+}
+.word-node-cod{
+	font-size:12px;
+	font-family:'docs-Open Sans';color:#000000;
+	background-color:transparent;
+	font-weight:400;
+	font-style:normal;
+	font-variant:normal;
+	text-decoration:none;
+	vertical-align:baseline;
+	white-space:pre;
+}
+.address-div{
+	font-size:12px;font-family:'docs-Open Sans';
+	color:#000000;
+	background-color:transparent;
+	font-weight:400;
+	font-style:normal;font-variant:normal;
+	text-decoration:none;
+	vertical-align:baseline;
+	white-space:pre;
+}
+.word-node-experience{
+	font-size:12px;font-family:'docs-Open Sans';
+	color:#2079c7;
+	background-color:transparent;
+	font-weight:700;
+	font-style:normal;
+	font-variant:normal;
+	text-decoration:none;
+	vertical-align:baseline;
+	white-space:pre;
+}
+.experience-inner-block{
+	margin-bottom: 20px
+}
+.experinece-firstline{
+		font-size:14.666666666666666px;
+		font-family:docs-Merriweather;
+		color:#000000;
+		background-color:transparent;
+		font-variant:normal;
+		text-decoration:none;
+		vertical-align:baseline;white-space:pre;
+	}
+
+.experinece-date{
+	font-size:10.666666666666666px;
+	font-family:'docs-Open Sans';
+	color:#666666;background-color:transparent;
+	font-weight:400;
+	font-style:normal;
+	font-variant:normal;
+	text-decoration:none;
+	vertical-align:baseline;
+	white-space:pre;
+}
+.experinece-description{
+	font-size:12px;
+	font-family:docs-Merriweather;
+	color:#666666;
+	background-color:transparent;
+	font-weight:400;
+	font-style:normal;
+	font-variant:normal;
+	text-decoration:none;
+	vertical-align:baseline;
+	white-space:pre;
+}
+
